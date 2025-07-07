@@ -1,12 +1,5 @@
-# COE451 Programming Assignment: FTP client-server
+#  FTP client-server
 
-This repository is for a course project: "Introduction to Cyber Security COE451" at KFUPM.
-
-[GitHub repository](https://github.com/FarisHijazi/Secure-FileTransfer)
-
-Faris Hijazi [s201578750@kfupm.edu.sa](mailto:s201578750@kfupm.edu.sa)
-
-Term 191
 
 ## Description
 
@@ -15,7 +8,7 @@ There are 2 programs that must be run: the client and the server.
 
 This program allows you to encrypt and send files between the client and the server using [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
 
-For up to date documentation, visit the [github repository](https://github.com/FarisHijazi/Secure-FileTransfer).
+
 
 ----
 
