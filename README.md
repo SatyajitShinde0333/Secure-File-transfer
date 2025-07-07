@@ -3,10 +3,99 @@
 
 ## Description
 
-The application is programmed with python and has a command line interface, use `-h`, `--help` to see usage.  
-There are 2 programs that must be run: the client and the server.
+# 🌐 Project Overview – Secure FTP Client-Server
 
-This program allows you to encrypt and send files between the client and the server using [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
+This project implements a **command-line FTP-like file transfer system**, consisting of two Python programs:
+
+- **Server:** Listens for incoming client connections and responds to commands (upload, download, list).
+- **Client:** Connects to the server and issues commands interactively.
+
+---
+
+## ✨ Key Features
+
+✅ Secure file transfers using AES encryption  
+✅ Support for plaintext transfers (no encryption)  
+✅ Modular commands (`get`, `put`, `ls`)  
+✅ Simple protocol built on top of TCP to handle message boundaries  
+✅ Interactive menu and CLI arguments  
+
+---
+
+## 🛠️ How I Created It
+
+### 🔹 Socket Programming Base
+- Started from Python socket programming examples and tutorials.
+- Implemented basic client-server communication using `socket` and `socketserver`.
+
+---
+
+### 🔹 TCP Message Framing
+Since TCP is a **stream protocol** (no message boundaries), I designed a simple protocol:
+- Each message is **prefixed with a 4-byte length field**.
+- The receiver:
+  - Reads 4 bytes to get message length.
+  - Then reads the remaining bytes.
+- This prevents issues when sending large files.
+
+---
+
+### 🔹 File Transfer Operations
+Implemented commands:
+- `ls` – list available files
+- `get` – download a file from the server
+- `put` – upload a file to the server
+- Added ability to specify files by **name or index**.
+
+---
+
+### 🔹 Encryption with AES
+Integrated `pyaes` for encryption and decryption.
+- **User specifies:**
+  - Cipher type (`none` or `aes`)
+  - Encryption key
+- **Before sending:**
+  - Data is encrypted if AES is enabled.
+- **On receiving:**
+  - Data is decrypted before saving.
+
+---
+
+### 🔹 Modified SSH-Style Authentication
+Added a **simplified authentication handshake inspired by SSH:**
+- Client sends credentials or token.
+- Server validates before accepting further commands.
+
+---
+
+### 🔹 Command-Line Interface
+Used `argparse` to create:
+- Main arguments (`--port`, `--host`, `--cipher`, `--key`)
+- Subcommands (`get`, `put`, `ls`)
+- Included `--help` output for clarity.
+
+---
+
+### 🔹 Interactive Menu
+Provided an **interactive prompt** where users can type commands.
+- Helpful for manual testing.
+
+---
+
+### 🔹 Batch Scripts for Testing
+Wrote `.bat` scripts (`start_client.bat`, `start_server.bat`) to launch quickly.
+
+---
+
+## ⚙️ How It Works – End-to-End Flow
+
+### Example Workflow: Uploading a File (`put`)
+
+**1️⃣ Startup**
+- Start the server:
+  ```bash
+  python server.py
+
 
 
 
